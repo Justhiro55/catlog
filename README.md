@@ -2,6 +2,7 @@
 
 [![Crates.io](https://img.shields.io/crates/v/http-catlog.svg)](https://crates.io/crates/http-catlog)
 [![Downloads](https://img.shields.io/crates/d/http-catlog.svg)](https://crates.io/crates/http-catlog)
+[![CI](https://github.com/Justhiro55/catlog/workflows/CI/badge.svg)](https://github.com/Justhiro55/catlog/actions)
 [![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/rust-1.70%2B-orange.svg)](https://www.rust-lang.org/)
 

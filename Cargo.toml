@@ -1,7 +1,16 @@
 [package]
-name = "catlog"
+name = "http-catlog"
 version = "0.1.0"
 edition = "2021"
+authors = ["Justhiro55"]
+description = "Monitor logs and display cat images when HTTP errors are detected"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Justhiro55/catlog"
+homepage = "https://github.com/Justhiro55/catlog"
+documentation = "https://docs.rs/catlog"
+readme = "README.md"
+keywords = ["log", "monitoring", "http", "cli", "cat"]
+categories = ["command-line-utilities", "development-tools"]
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }

@@ -102,7 +102,7 @@ async fn follow_file(file_path: &str, args: &Args, status_filter: Option<&[u16]>
 
     // Continue reading new lines
     loop {
-        if let Ok(_) = rx.try_recv() {
+        if rx.try_recv().is_ok() {
             // File was modified, read new lines
             while reader.read_line(&mut line)? > 0 {
                 let trimmed = line.trim_end();
@@ -133,13 +133,11 @@ async fn exec_command(command: &str, args: &Args, status_filter: Option<&[u16]>)
     let filter_clone = status_filter.map(|s| s.to_vec());
 
     let stdout_handle = tokio::task::spawn_blocking(move || {
-        for line in stdout_reader.lines() {
-            if let Ok(line) = line {
-                let rt = tokio::runtime::Runtime::new().unwrap();
-                rt.block_on(async {
-                    let _ = process_line(&line, &args_clone, filter_clone.as_deref()).await;
-                });
-            }
+        for line in stdout_reader.lines().map_while(Result::ok) {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            rt.block_on(async {
+                let _ = process_line(&line, &args_clone, filter_clone.as_deref()).await;
+            });
         }
     });
 
@@ -147,13 +145,11 @@ async fn exec_command(command: &str, args: &Args, status_filter: Option<&[u16]>)
     let filter_clone2 = status_filter.map(|s| s.to_vec());
 
     let stderr_handle = tokio::task::spawn_blocking(move || {
-        for line in stderr_reader.lines() {
-            if let Ok(line) = line {
-                let rt = tokio::runtime::Runtime::new().unwrap();
-                rt.block_on(async {
-                    let _ = process_line(&line, &args_clone2, filter_clone2.as_deref()).await;
-                });
-            }
+        for line in stderr_reader.lines().map_while(Result::ok) {
+            let rt = tokio::runtime::Runtime::new().unwrap();
+            rt.block_on(async {
+                let _ = process_line(&line, &args_clone2, filter_clone2.as_deref()).await;
+            });
         }
     });
 
@@ -183,7 +179,7 @@ async fn process_line(line: &str, args: &Args, status_filter: Option<&[u16]>) ->
                 true
             } else {
                 // Default: errors only (4xx, 5xx)
-                code >= 400 && code < 600
+                (400..600).contains(&code)
             };
 
             if should_show {

@@ -1,6 +1,6 @@
 [package]
 name = "http-catlog"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Justhiro55"]
 description = "Monitor logs and display cat images when HTTP errors are detected"

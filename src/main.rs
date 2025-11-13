@@ -46,16 +46,12 @@ async fn main() -> Result<()> {
     let args = Args::parse();
 
     // Parse status code filter
-    let status_filter = if let Some(codes) = &args.status {
-        Some(
-            codes
-                .split(',')
-                .filter_map(|s| s.trim().parse::<u16>().ok())
-                .collect::<Vec<_>>(),
-        )
-    } else {
-        None
-    };
+    let status_filter = args.status.as_ref().map(|codes| {
+        codes
+            .split(',')
+            .filter_map(|s| s.trim().parse::<u16>().ok())
+            .collect::<Vec<_>>()
+    });
 
     // Determine which mode to run
     if let Some(ref file_path) = args.follow {
@@ -84,8 +80,8 @@ async fn pipe_mode(args: &Args, status_filter: Option<&[u16]>) -> Result<()> {
 
 async fn follow_file(file_path: &str, args: &Args, status_filter: Option<&[u16]>) -> Result<()> {
     use notify::{Config, RecommendedWatcher, RecursiveMode, Watcher};
-    use std::sync::mpsc::channel;
     use std::path::Path;
+    use std::sync::mpsc::channel;
 
     let path = Path::new(file_path);
     let file = std::fs::File::open(path)?;

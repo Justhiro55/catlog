@@ -33,19 +33,19 @@ jobs:
         include:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            asset_name: http-catlog-linux-x86_64
+            asset_name: catlog-linux-x86_64
           - os: ubuntu-latest
             target: x86_64-unknown-linux-musl
-            asset_name: http-catlog-linux-x86_64-musl
+            asset_name: catlog-linux-x86_64-musl
           - os: macos-latest
             target: x86_64-apple-darwin
-            asset_name: http-catlog-macos-x86_64
+            asset_name: catlog-macos-x86_64
           - os: macos-latest
             target: aarch64-apple-darwin
-            asset_name: http-catlog-macos-arm64
+            asset_name: catlog-macos-arm64
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            asset_name: http-catlog-windows-x86_64.exe
+            asset_name: catlog-windows-x86_64.exe
 
     steps:
       - name: Checkout repository
@@ -66,13 +66,13 @@ jobs:
       - name: Prepare binary (Unix)
         if: matrix.os != 'windows-latest'
         run: |
-          cp target/${{ matrix.target }}/release/http-catlog ${{ matrix.asset_name }}
+          cp target/${{ matrix.target }}/release/catlog ${{ matrix.asset_name }}
           chmod +x ${{ matrix.asset_name }}
 
       - name: Prepare binary (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          cp target/${{ matrix.target }}/release/http-catlog.exe ${{ matrix.asset_name }}
+          cp target/${{ matrix.target }}/release/catlog.exe ${{ matrix.asset_name }}
 
       - name: Upload Release Asset
         env:

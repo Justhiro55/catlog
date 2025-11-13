@@ -33,23 +33,23 @@ cargo install --path .
 
 ### Pipe mode
 ```bash
-tail -f /var/log/nginx/access.log | http-catlog
+tail -f /var/log/nginx/access.log | catlog
 ```
 
 ### File watch mode
 ```bash
-http-catlog -f /var/log/app.log
+catlog -f /var/log/app.log
 ```
 
 ### Command execution mode
 ```bash
-http-catlog -e "tail -f /var/log/app.log"
+catlog -e "tail -f /var/log/app.log"
 ```
 
 ## Options
 
 ```bash
-http-catlog [OPTIONS]
+catlog [OPTIONS]
 ```
 
 - `-f, --follow <FILE>` - Follow a file (like tail -f)
@@ -65,32 +65,32 @@ http-catlog [OPTIONS]
 
 **Monitor nginx access logs:**
 ```bash
-tail -f /var/log/nginx/access.log | http-catlog
+tail -f /var/log/nginx/access.log | catlog
 ```
 
 **Watch application logs:**
 ```bash
-http-catlog -f app.log
+catlog -f app.log
 ```
 
 **Monitor with specific status codes only:**
 ```bash
-echo "Error 404 Not Found" | http-catlog --status 404,503
+echo "Error 404 Not Found" | catlog --status 404,503
 ```
 
 **Execute command and monitor:**
 ```bash
-http-catlog -e "docker logs -f mycontainer"
+catlog -e "docker logs -f mycontainer"
 ```
 
 **Text-only mode (no images):**
 ```bash
-tail -f /var/log/app.log | http-catlog --no-image
+tail -f /var/log/app.log | catlog --no-image
 ```
 
 **Show cats for all HTTP status codes:**
 ```bash
-http-catlog -f app.log --all
+catlog -f app.log --all
 ```
 
 ## Terminal Compatibility

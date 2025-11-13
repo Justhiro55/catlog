@@ -12,6 +12,10 @@ readme = "README.md"
 keywords = ["log", "monitoring", "http", "cli", "cat"]
 categories = ["command-line-utilities", "development-tools"]
 
+[[bin]]
+name = "catlog"
+path = "src/main.rs"
+
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
 tokio = { version = "1.40", features = ["full"] }

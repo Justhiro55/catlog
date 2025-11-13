@@ -10,7 +10,7 @@
 Watch your logs and get adorable cat images from [http.cat](https://http.cat) displayed right in your terminal whenever HTTP error status codes are detected.
 
 <p align="center">
-  <img src="documents/catlog.png" alt="http-catlog demo" width="600">
+  <img src="documents/catlog.png" alt="http-catlog demo" width="410">
 </p>
 
 ## Installation

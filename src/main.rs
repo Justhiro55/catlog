@@ -24,10 +24,6 @@ struct Args {
     #[arg(long, default_value = "60")]
     size: u32,
 
-    /// Display as ASCII art
-    #[arg(long)]
-    ascii: bool,
-
     /// Don't display images
     #[arg(long)]
     no_image: bool,
@@ -209,7 +205,7 @@ async fn display_cat_for_status(code: u16, args: &Args) -> Result<()> {
 
     if !args.no_image {
         if let Ok(image_data) = cat_api::fetch_cat_image_for_status(code).await {
-            display::display_image(&image_data, args.size, args.ascii)?;
+            display::display_image(&image_data, args.size)?;
         }
     }
 

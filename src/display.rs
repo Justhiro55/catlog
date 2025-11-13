@@ -3,7 +3,7 @@ use image::io::Reader as ImageReader;
 use std::io::Cursor;
 use viuer::Config;
 
-pub fn display_image(image_data: &[u8], size: u32, _ascii: bool) -> Result<()> {
+pub fn display_image(image_data: &[u8], size: u32) -> Result<()> {
     // Load image from bytes
     let img = ImageReader::new(Cursor::new(image_data))
         .with_guessed_format()?

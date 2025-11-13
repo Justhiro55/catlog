@@ -30,7 +30,6 @@ catlog -e "tail -f /var/log/app.log"
 - `-f, --follow <FILE>`: Follow a file (like tail -f)
 - `-e, --exec <COMMAND>`: Execute a command and monitor its output
 - `--size <N>`: Image size in characters (default: 60)
-- `--ascii`: Display as ASCII art
 - `--no-image`: Don't display images (text only)
 - `--all`: Show cats for all status codes
 - `--status <CODES>`: Comma-separated list of specific status codes
